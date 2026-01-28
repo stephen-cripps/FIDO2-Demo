@@ -6,16 +6,16 @@ services.AddFido2(options =>
 {
     options.ServerDomain = "localhost";
     options.ServerName = "Fido2 Test Server";
-    options.Origins= new HashSet<string>()
+    options.Origins = new HashSet<string>()
     {
         "https://localhost:5001"
     };
     options.ChallengeSize = 32;
 });
 
+services.AddControllers();
 
 var app = builder.Build();
 
 app.MapControllers();
-
 app.Run();
