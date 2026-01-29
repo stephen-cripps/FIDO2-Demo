@@ -10,6 +10,7 @@
     <ItemGroup>
       <PackageReference Include="Fido2" Version="4.0.0" />
       <PackageReference Include="Fido2.AspNet" Version="4.0.0" />
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.2" />
       <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
 

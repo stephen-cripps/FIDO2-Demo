@@ -1,3 +1,5 @@
+using FidoAuthServer.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
@@ -8,14 +10,30 @@ services.AddFido2(options =>
     options.ServerName = "Fido2 Test Server";
     options.Origins = new HashSet<string>()
     {
-        "https://localhost:5001"
+        "http://localhost:3000"
     };
     options.ChallengeSize = 32;
 });
+
+services.AddCors(opts =>
+{
+    opts.AddDefaultPolicy(pol =>
+    {
+        pol
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin();
+    });
+});
+
+services.AddTransient<IUserRepository, UserRepository>();
 
 services.AddControllers();
 
 var app = builder.Build();
 
+app.UseCors();
 app.MapControllers();
+
+DbInitialiser.Initialise();
 app.Run();
